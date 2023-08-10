@@ -9,6 +9,9 @@ contract NupNFTTest is Test {
     NupNFTDeploy nupNftDeploy;
     NupNFT nupNft;
     address deployAddress = makeAddr("deployer");
+    address user = makeAddr("user");
+    string public constant NFT_URL =
+        "https://bafybeigcnzlecuumq3c4yglioxjdnxyxvo52vv6sd33sqdffuv4ppbzqfi.ipfs.dweb.link/image.png";
 
     function setUp() public {
         nupNftDeploy = new NupNFTDeploy();
@@ -21,6 +24,20 @@ contract NupNFTTest is Test {
         assert(
             keccak256(abi.encodePacked(nftName)) ==
                 keccak256(abi.encodePacked(contractName))
+        );
+    }
+
+    function testCanMint() public {
+        vm.prank(user);
+        vm.deal(user, 10 ether);
+        nupNft.mintNft(NFT_URL);
+
+        uint256 tokenCounter = nupNft.getTokenCounter();
+        assertEq(tokenCounter, 1);
+        string memory tokenUrl = nupNft.tokenURI(0);
+        assert(
+            keccak256(abi.encodePacked(tokenUrl)) ==
+                keccak256(abi.encodePacked(NFT_URL))
         );
     }
 }
