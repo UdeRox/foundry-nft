@@ -9,7 +9,19 @@ contract NupNFT is ERC721 {
         s_tokenCounter = 0;
     }
 
-    function mint(address to, uint256 tokenId) public {
-        _mint(to, tokenId);
+    function mintToken(string memory /*tokenURI*/) public{
+        _safeMint(msg.sender, s_tokenCounter);
+        s_tokenCounter++;
+    } 
+
+    function getTokenCounter() public view returns (uint256) {
+        return s_tokenCounter;
+    }
+
+    // function getName() public view returns (string memory){
+    //     return 
+    // }
+    function incrementTokenCounter() public {
+        s_tokenCounter++;
     }
 }

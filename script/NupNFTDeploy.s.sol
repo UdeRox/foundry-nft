@@ -5,8 +5,9 @@ import "forge-std/Script.sol";
 import {NupNFT} from "../src/NupNFT.sol";
 
 contract NupNFTDeploy is Script {
-    function main() public returns (NupNFT) {
-        NupNFT nupNft = new NupNFT();
+    NupNFT nupNft;
+
+    function run() external returns (NupNFT) {
         vm.startBroadcast();
         nupNft = new NupNFT();
         vm.stopBroadcast();
