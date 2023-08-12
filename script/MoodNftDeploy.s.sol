@@ -12,7 +12,7 @@ contract MoodNftDeploy is Script {
 
     function run() public returns (MoodNft) {
         vm.startBroadcast();
-        moodNft = new MoodNft("", "");
+        moodNft = new MoodNft(HAPPY_SVG_URI, "");
         vm.stopBroadcast();
         return moodNft;
     }

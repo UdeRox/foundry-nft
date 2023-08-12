@@ -14,8 +14,8 @@ contract MoodNft is ERC721 {
     }
 
     constructor(
-        string memory sadSvgImageUri,
-        string memory happySvgImageUri
+        string memory happySvgImageUri,
+        string memory sadSvgImageUri
     ) ERC721("MoodNft", "MnFT") {
         s_sadSvg = sadSvgImageUri;
         s_happySvg = happySvgImageUri;
@@ -36,11 +36,17 @@ contract MoodNft is ERC721 {
         uint256 tokenId
     ) public view override returns (string memory) {
         string memory tokenUri;
-        if (s_nftToMood[tokenId] == Mood.HAPPY) {
-            tokenUri = s_happySvg;
-        } else {
-            tokenUri = s_sadSvg;
-        }
-        return tokenUri;
+        // if (s_nftToMood[tokenId] == Mood.HAPPY) {
+        //     tokenUri = s_happySvg;
+        // } else {
+        //     tokenUri = s_sadSvg;
+        // }
+        // return tokenUri;
+        return s_happySvg;
+        // return s_nftToMood[tokenId];
+    }
+
+    function getHappySvg() public view returns (string memory) {
+        return s_happySvg;
     }
 }
